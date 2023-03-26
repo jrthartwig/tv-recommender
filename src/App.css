@@ -9,7 +9,8 @@ body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  margin-top: 1rem; /* Add this line */
+  margin-top: 1rem;
+  padding-bottom: 5rem; /* Add this line */
 }
 
 header {
@@ -93,4 +94,10 @@ li {
   font-size: 1.2rem;
   color: #2c0703;
   padding: 0.5rem 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .recommended-shows {
+    margin-bottom: 200px; /* Replace with the height of your footer */
+  }
 }
