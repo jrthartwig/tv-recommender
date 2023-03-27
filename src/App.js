@@ -41,7 +41,9 @@ function App() {
   return (
     <>
       <header>
-        <h1>TelevisionAIry</h1>
+        <h1 className="title">
+          Television<span className="accentuate-ai">AI</span>ry
+        </h1>
       </header>
       <div className="container">
         <form onSubmit={handleSubmit}>
