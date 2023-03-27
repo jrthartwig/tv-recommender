@@ -23,6 +23,9 @@
   .footer {
     position: fixed;
     bottom: 0;
-    font-size: 0.6em;
+    padding: 2px;
+  }
+  .footer-text {
+    font-size: 12px; /* Adjust the font size */
   }
 }

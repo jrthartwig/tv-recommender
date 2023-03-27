@@ -30,7 +30,7 @@ function App() {
         }
       );
       const data = await res.json();
-      setRecommendedShows(data.recommended_shows.map((show) => show.trim()));
+      setRecommendedShows(data.recommended_shows);
     } catch (err) {
       console.error(err);
     } finally {
@@ -59,7 +59,12 @@ function App() {
             <h2>Recommended Shows:</h2>
             <ul>
               {recommendedShows.map((show) => (
-                <li key={show}>{show}</li>
+                <li key={show.title}>
+                  <div className="show-title">{show.title}</div>
+                  <div className="show-platforms">
+                    Available on: {show.available_on.join(", ")}
+                  </div>
+                </li>
               ))}
             </ul>
           </div>
