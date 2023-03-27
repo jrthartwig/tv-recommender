@@ -5,10 +5,20 @@ import Footer from "./Footer";
 function App() {
   const [showInput, setShowInput] = useState("");
   const [recommendedShows, setRecommendedShows] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  function titleCase(str) {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
+      const formattedShowInput = titleCase(showInput.trim());
       const res = await fetch(
         "https://tvrecmodel.azurewebsites.net/recommend",
         {
@@ -16,13 +26,15 @@ function App() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ shows: [showInput] }),
+          body: JSON.stringify({ shows: [formattedShowInput] }),
         }
       );
       const data = await res.json();
-      setRecommendedShows(data.recommended_shows);
+      setRecommendedShows(data.recommended_shows.map((show) => show.trim()));
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,6 +53,7 @@ function App() {
           />
           <button type="submit">Get Recommendations</button>
         </form>
+        {loading && <div className="loader"></div>}
         {recommendedShows.length > 0 && (
           <div className="recommended-shows">
             <h2>Recommended Shows:</h2>
